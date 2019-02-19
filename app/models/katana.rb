@@ -1,0 +1,2 @@
+class Katana < ApplicationRecord
+end
