@@ -3,6 +3,7 @@
 class Tantou < ApplicationRecord
   belongs_to :kinji, class_name: 'Katana'
   belongs_to :katana
+  belongs_to :user
 
   validates :mokutan, inclusion: { in: 50..999 }
   validates :tamahagane, inclusion: { in: 50..999 }

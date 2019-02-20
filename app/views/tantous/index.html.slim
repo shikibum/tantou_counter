@@ -1,2 +1,62 @@
 鍛刀カウンター
 p = current_user.id
+div class="tantou-items"
+  div class="tantou-item"
+    div class='tantou-item_form'
+      .form-items
+        = form_with(model: @tantou, local: true) do |f|
+          .form-item class='select'
+            = f.label '近侍', class: 'label'
+            = f.select(:kinji_id, options_from_collection_for_select(Katana.all.order(:rarity), :id, :name))
+          .form-item
+            = f.label '木炭', class: 'label'
+            = f.number_field :mokutan, class: 'input'
+          .form-item
+            = f.label '玉鋼', class: 'label'
+            = f.number_field :tamahagane, class: 'input'
+          .form-item
+            = f.label '冷却材', class: 'label'
+            = f.number_field :reikyakuzai, class: 'input'
+          .form-item
+            = f.label '砥石', class: 'label'
+            = f.number_field :toishi, class: 'input'
+          .form-item class='select'
+            = f.label '札', class: 'label'
+            = f.select :fuda, %i[なし 梅 竹 松]
+          .form-item class='select'
+            = f.label '鍛刀結果', class: 'label'
+            = f.select(:katana_id, options_from_collection_for_select(Katana.all.all.order(:rarity), :id, :name))
+          div class='buttons'
+            .form-item
+              = f.submit class: 'button is-link'
+              = link_to '選択値リセット', tantous_path, class: 'button is-text'
+  div class="tantou-item"
+    div class="tantou-item_results"
+      table class="results_table"
+            thead
+              td id
+              th 回数
+              th 近侍
+              th 木炭
+              th 玉鋼
+              th 冷却材
+              th 砥石
+              th 札
+              th 結果
+              th レア度
+            tbody
+              - @tantous.each do |tantou|
+                tr class="tantou-result"
+                  td = tantou.id
+                  td = @tantous.index(tantou) + 1
+                  td = tantou.kinji&.name
+                  td = tantou.mokutan
+                  td = tantou.tamahagane
+                  td = tantou.reikyakuzai
+                  td = tantou.toishi
+                  td = tantou.fuda
+                  td = tantou.katana&.name
+                  td = tantou.katana&.rarity
+  
+
+
