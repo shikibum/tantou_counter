@@ -2,7 +2,7 @@
 
 class TantousController < ApplicationController
   def index
-    @tantous = current_user.tantous
+    @tantous = current_user.tantous.order(created_at: :desc)
     if current_user.tantous.last.present?
       last_tantou = current_user.tantous.last
       @tantou = Tantou.new(

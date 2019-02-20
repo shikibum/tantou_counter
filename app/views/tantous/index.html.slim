@@ -1,5 +1,4 @@
-鍛刀カウンター
-p = current_user.id
+h3 class="title" 鍛刀カウンター 
 div class="tantou-items"
   div class="tantou-item"
     div class='tantou-item_form'
@@ -33,7 +32,6 @@ div class="tantou-items"
     div class="tantou-item_results"
       table class="results_table"
             thead
-              td id
               th 回数
               th 近侍
               th 木炭
@@ -44,10 +42,9 @@ div class="tantou-items"
               th 結果
               th レア度
             tbody
-              - @tantous.each do |tantou|
+              - @tantous.each.with_index do |tantou, i|
                 tr class="tantou-result"
-                  td = tantou.id
-                  td = @tantous.index(tantou) + 1
+                  td = @tantous.size - i
                   td = tantou.kinji&.name
                   td = tantou.mokutan
                   td = tantou.tamahagane
