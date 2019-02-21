@@ -6,7 +6,7 @@ div class="tantou-items"
         = form_with(model: @tantou, local: true) do |f|
           .form-item class='select'
             = f.label '近侍', class: 'label'
-            = f.select(:kinji_id, options_from_collection_for_select(Katana.all.order(:rarity), :id, :name))
+            = f.select(:kinji_id, options_from_collection_for_select(Katana.all.order(:rarity), :id, :name, @tantou.kinji_id))
           .form-item
             = f.label '木炭', class: 'label'
             = f.number_field :mokutan, class: 'input'
@@ -22,10 +22,10 @@ div class="tantou-items"
           .form-item class='select'
             = f.label '札', class: 'label'
             = f.select :fuda, %i[なし 梅 竹 松 富士]
-          .form-item class='select'
-            = f.label '鍛刀結果', class: 'label'
-            = f.select(:katana_id, options_from_collection_for_select(Katana.all.all.order(:rarity), :id, :name))
-          div class='buttons'
+          / .form-item class='select'
+          /   = f.label '鍛刀結果', class: 'label'
+          /   = f.select(:katana_id, options_from_collection_for_select(Katana.all.all.order(:rarity), :id, :name))
+          div class='button'
             .form-item
               = f.submit class: 'button is-link'
   div class="tantou-item"
@@ -51,8 +51,14 @@ div class="tantou-items"
                   td = tantou.reikyakuzai
                   td = tantou.toishi
                   td = tantou.fuda
-                  td = tantou.katana&.name
-                  td = tantou.katana&.rarity
-  
-
-
+                  td
+                    - if tantou.katana&.name.present?
+                      = tantou.katana.name
+                    - else
+                      = form_with(model: tantou, local: true) do |f| 
+                        .form-item class='select'
+                          = f.select(:katana_id, options_from_collection_for_select(Katana.all.all.order(:rarity), :id, :name),  include_blank: true )
+                          = f.submit '入力', class: 'button is-link'
+                  / td
+                  /   - if tantou.katana&.rarity,present?
+                  /     = tantou.katana&.rarity
