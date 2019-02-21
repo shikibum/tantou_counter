@@ -6,7 +6,7 @@ div class="tantou-items"
         = form_with(model: @tantou, local: true) do |f|
           .form-item class='select'
             = f.label '近侍', class: 'label'
-            = f.select(:kinji_id, options_from_collection_for_select(Katana.all.order(:rarity), :id, :name, @tantou.kinji_id))
+            = f.select(:kinji_id, options_from_collection_for_select(Katana.all.order(:rarity), :id, :name, @tantou.kinji_id), include_blank: true)
           .form-item
             = f.label '木炭', class: 'label'
             = f.number_field :mokutan, class: 'input'
@@ -27,7 +27,7 @@ div class="tantou-items"
           /   = f.select(:katana_id, options_from_collection_for_select(Katana.all.all.order(:rarity), :id, :name))
           div class='button'
             .form-item
-              = f.submit class: 'button is-link'
+              = f.submit '鍛刀', class: 'button is-link'
   div class="tantou-item"
     div class="tantou-item_results"
       table class="results_table"
