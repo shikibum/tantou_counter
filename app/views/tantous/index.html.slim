@@ -59,6 +59,6 @@ div class="tantou-items"
                         .form-item class='select'
                           = f.select(:katana_id, options_from_collection_for_select(Katana.all.all.order(:rarity), :id, :name),  include_blank: true )
                           = f.submit '入力', class: 'button is-link'
-                  / td
-                  /   - if tantou.katana&.rarity,present?
-                  /     = tantou.katana&.rarity
+                  td
+                    - if tantou.katana&.rarity.present?
+                      = tantou.katana&.rarity
