@@ -1,64 +1,58 @@
-h3 class="title" 鍛刀カウンター 
-div class="tantou-items"
-  div class="tantou-item"
-    div class='tantou-item_form'
-      .form-items
-        = form_with(model: @tantou, local: true) do |f|
-          .form-item class='select'
-            = f.label '近侍', class: 'label'
-            = f.select(:kinji_id, options_from_collection_for_select(Katana.all.order(:rarity), :id, :name, @tantou.kinji_id), include_blank: true)
-          .form-item
-            = f.label '木炭', class: 'label'
-            = f.number_field :mokutan, class: 'input'
-          .form-item
-            = f.label '玉鋼', class: 'label'
-            = f.number_field :tamahagane, class: 'input'
-          .form-item
-            = f.label '冷却材', class: 'label'
-            = f.number_field :reikyakuzai, class: 'input'
-          .form-item
-            = f.label '砥石', class: 'label'
-            = f.number_field :toishi, class: 'input'
-          .form-item class='select'
-            = f.label '札', class: 'label'
-            = f.select :fuda, %i[なし 梅 竹 松 富士]
-          / .form-item class='select'
-          /   = f.label '鍛刀結果', class: 'label'
-          /   = f.select(:katana_id, options_from_collection_for_select(Katana.all.all.order(:rarity), :id, :name))
-          div class='button'
-            .form-item
-              = f.submit '鍛刀', class: 'button is-link'
-  div class="tantou-item"
-    div class="tantou-item_results"
-      table class="results_table"
-            thead
-              th 回数
-              th 近侍
-              th 木
-              th 玉
-              th 冷
-              th 砥
-              th 札
-              th 結果
-              th レア度
-            tbody
-              - @tantous.each.with_index do |tantou, i|
-                tr class="tantou-result"
-                  td = @tantous.size - i
-                  td = tantou.kinji&.name
-                  td = tantou.mokutan
-                  td = tantou.tamahagane
-                  td = tantou.reikyakuzai
-                  td = tantou.toishi
-                  td = tantou.fuda
-                  td
-                    - if tantou.katana&.name.present?
-                      = tantou.katana.name
-                    - else
-                      = form_with(model: tantou, local: true) do |f| 
-                        .form-item class='select'
-                          = f.select(:katana_id, options_from_collection_for_select(Katana.all.all.order(:rarity), :id, :name),  include_blank: true )
-                          = f.submit '入力', class: 'button is-link'
-                  td
-                    - if tantou.katana&.rarity.present?
-                      = tantou.katana&.rarity
+.container
+  h3 class="title" 鍛刀カウンター 
+  div class="tantou-items"
+    div class="tantou-item"
+      div class='tantou-item_form'
+        .form-items
+          = form_with(model: @tantou, local: true) do |f|
+            .form-item class='kinji select columns is-mobile'
+              = f.label '近侍', class: 'label column is-one-quarter-mobile is-1-desktop'
+              = f.select(:kinji_id, options_from_collection_for_select(Katana.all.order(:rarity), :id, :name, @tantou.kinji_id), { include_blank: true }, class: 'selectbox column is-three-quarters-mobile is-2-desktop')
+            .form-item class='columns is-mobile'
+              = f.label '木炭', class: 'label column is-one-quarter-mobile is-1-desktop'
+              = f.number_field :mokutan, class: 'first_input input column is-3-mobile is-1-desktop'
+            .form-item class='columns is-mobile'
+              = f.label '玉鋼', class: 'label column is-one-quarter-mobile is-1-desktop'
+              = f.number_field :tamahagane, class: 'input column is-3-mobile is-1-desktop'
+            .form-item class='columns is-mobile'
+              = f.label '冷却材', class: 'label column is-one-quarter-mobile is-1-desktop'
+              = f.number_field :reikyakuzai, class: 'input column is-3-mobile is-1-desktop'
+            .form-item class='columns is-mobile'
+              = f.label '砥石', class: 'label column is-one-quarter-mobile is-1-desktop'
+              = f.number_field :toishi, class: 'input column is-3-mobile is-1-desktop'
+            .form-item class='select columns is-mobile'
+              = f.label '札', class: 'label column is-one-quarter-mobile is-1-desktop'
+              = f.select :fuda, %i[なし 梅 竹 松 富士], {}, class: 'selectbox column is-three-quarters-mobile is-1-desktop'
+            div.form-item class='is-mobile'
+              = f.submit '鍛刀', class: 'button is-primary is-medium'
+    div.tantou-item.share
+      a.share.button.is-info
+        span.icon
+          i.fab.fa-twitter
+        span 結果をツイートする
+    div class="tantou-item"
+      div class="tantou-item_results"
+          - @tantous.each.with_index do |tantou, i|
+            div.tantou_result
+              div.tantou_result_first-line
+                span.result_size
+                  = @tantous.size - i
+                span.result_kinji
+                  = '近侍: ' + tantou.kinji&.name
+                div.recipi
+                  span = "#{tantou.mokutan}"
+                  span = "#{tantou.tamahagane}"
+                  span = "#{tantou.reikyakuzai} "
+                  span = "#{tantou.toishi}"
+                span.result_fuda
+                  = tantou.fuda
+              div.tantou_result_second-line
+                - if tantou.katana&.name.present?
+                  = tantou.katana.name
+                - else
+                  = form_with(model: tantou, local: true) do |f| 
+                    .form-item class='select field has-addons'
+                      = f.select(:katana_id, options_from_collection_for_select(Katana.all.all.order(:rarity), :id, :name), { include_blank: true }, class: '' )
+                      = f.submit '入力', class: 'button is-info'
+
+
