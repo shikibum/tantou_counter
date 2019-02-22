@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class TantousController < ApplicationController
+  before_action :require_current_user
+
   def index
     @tantous = current_user.tantous.order(created_at: :desc)
     if current_user.tantous.last.present?
