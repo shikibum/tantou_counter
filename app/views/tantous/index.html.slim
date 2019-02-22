@@ -34,7 +34,7 @@
             div.form-item class='is-mobile'
               = f.submit '鍛刀', class: 'button is-primary is-medium'
     div.tantou-item.share
-      a.twitter-share-button href="https://twitter.com/share?ref_src=twsrc%5Etfw" data-size="large" data-text="私の鍛刀結果はこちら" data-url="https://tantou-counter.herokuapp.com/#{user_path(current_user.share_id)}" data-show-count="false" data-hashtags="tantou_counter,鍛刀カウンター,刀剣乱舞"
+      a.twitter-share-button href="https://twitter.com/share?ref_src=twsrc%5Etfw" data-size="large" data-text="私の鍛刀結果はこちら" data-url="https://tantou-counter.herokuapp.com#{user_path(current_user.share_id)}" data-show-count="false" data-hashtags="tantou_counter,鍛刀カウンター,刀剣乱舞"
         Tweet
       script(async src="https://platform.twitter.com/widgets.js" charset="utf-8")
     div class="tantou-item"
