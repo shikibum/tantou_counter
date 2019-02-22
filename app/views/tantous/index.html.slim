@@ -5,24 +5,32 @@
       div class='tantou-item_form'
         .form-items
           = form_with(model: @tantou, local: true) do |f|
-            .form-item class='kinji select columns is-mobile'
+            .form-item class='kinji columns is-mobile'
               = f.label '近侍', class: 'label column is-one-quarter-mobile is-1-desktop'
-              = f.select(:kinji_id, options_from_collection_for_select(Katana.all.order(:rarity), :id, :name, @tantou.kinji_id), { include_blank: true }, class: 'selectbox column is-three-quarters-mobile is-2-desktop')
+              .column.is-three-quarters-mobile.is-2-desktop
+                .select
+                  = f.select(:kinji_id, options_from_collection_for_select(Katana.all.order(:rarity), :id, :name, @tantou.kinji_id), include_blank: true)
             .form-item class='columns is-mobile'
               = f.label '木炭', class: 'label column is-one-quarter-mobile is-1-desktop'
-              = f.number_field :mokutan, class: 'first_input input column is-3-mobile is-1-desktop'
+              .column.is-3-mobile.is-1-desktop
+                = f.number_field :mokutan, class: 'input'
             .form-item class='columns is-mobile'
               = f.label '玉鋼', class: 'label column is-one-quarter-mobile is-1-desktop'
-              = f.number_field :tamahagane, class: 'input column is-3-mobile is-1-desktop'
+              .column.is-3-mobile.is-1-desktop
+                = f.number_field :tamahagane, class: 'input'
             .form-item class='columns is-mobile'
               = f.label '冷却材', class: 'label column is-one-quarter-mobile is-1-desktop'
-              = f.number_field :reikyakuzai, class: 'input column is-3-mobile is-1-desktop'
+              .column.is-3-mobile.is-1-desktop
+                = f.number_field :reikyakuzai, class: 'input'
             .form-item class='columns is-mobile'
               = f.label '砥石', class: 'label column is-one-quarter-mobile is-1-desktop'
-              = f.number_field :toishi, class: 'input column is-3-mobile is-1-desktop'
-            .form-item class='select columns is-mobile'
+              .column.is-3-mobile.is-1-desktop
+                = f.number_field :toishi, class: 'input'
+            .form-item class='columns is-mobile'
               = f.label '札', class: 'label column is-one-quarter-mobile is-1-desktop'
-              = f.select :fuda, %i[なし 梅 竹 松 富士], {}, class: 'selectbox column is-three-quarters-mobile is-1-desktop'
+              .column.is-three-quarters-mobile.is-1-desktop
+                .select
+                  = f.select :fuda, %i[なし 梅 竹 松 富士]
             div.form-item class='is-mobile'
               = f.submit '鍛刀', class: 'button is-primary is-medium'
     div.tantou-item.share
@@ -53,5 +61,7 @@
                     .form-item class='select field has-addons'
                       = f.select(:katana_id, options_from_collection_for_select(Katana.all.all.order(:rarity), :id, :name), { include_blank: true }, class: '' )
                       = f.submit '入力', class: 'button is-info'
+    .tantou-item
+      p ブラウザを変えたり、ブラウザのCookieを削除したり、シークレットウィンドウで使うとデータが消えます！
 
 
