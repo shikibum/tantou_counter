@@ -7,24 +7,24 @@
           = form_with(model: @tantou, local: true) do |f|
             .form-item class='kinji columns is-mobile'
               = f.label '近侍', class: 'label column is-one-quarter-mobile is-1-desktop'
-              .column.is-three-quarters-mobile.is-2-desktop
+              .column.is-three-quarters-mobile.is-3-desktop
                 .select
                   = f.select(:kinji_id, options_from_collection_for_select(Katana.all.order(:rarity), :id, :name, @tantou.kinji_id), include_blank: true)
             .form-item class='columns is-mobile'
               = f.label '木炭', class: 'label column is-one-quarter-mobile is-1-desktop'
-              .column.is-3-mobile.is-1-desktop
+              .column.is-3-mobile.is-2-desktop
                 = f.number_field :mokutan, class: 'input'
             .form-item class='columns is-mobile'
               = f.label '玉鋼', class: 'label column is-one-quarter-mobile is-1-desktop'
-              .column.is-3-mobile.is-1-desktop
+              .column.is-3-mobile.is-2-desktop
                 = f.number_field :tamahagane, class: 'input'
             .form-item class='columns is-mobile'
               = f.label '冷却材', class: 'label column is-one-quarter-mobile is-1-desktop'
-              .column.is-3-mobile.is-1-desktop
+              .column.is-3-mobile.is-2-desktop
                 = f.number_field :reikyakuzai, class: 'input'
             .form-item class='columns is-mobile'
               = f.label '砥石', class: 'label column is-one-quarter-mobile is-1-desktop'
-              .column.is-3-mobile.is-1-desktop
+              .column.is-3-mobile.is-2-desktop
                 = f.number_field :toishi, class: 'input'
             .form-item class='columns is-mobile'
               = f.label '札', class: 'label column is-one-quarter-mobile is-1-desktop'
@@ -46,15 +46,15 @@
                   = @tantous.size - i
                 span.result_kinji
                   = '近侍: ' + tantou.kinji&.name
-                div.recipi
+                .recipi
                   span = "#{tantou.mokutan}"
                   span = "#{tantou.tamahagane}"
                   span = "#{tantou.reikyakuzai} "
                   span = "#{tantou.toishi}"
                 span.result_fuda
                   = tantou.fuda
-              .tantou_result_second-line.colmuns
-                .tantou_result_form.column
+              .tantou_result_second-line
+                .tantou_result_form
                   - if tantou.katana&.name.present?
                     = tantou.katana.name
                   - else
@@ -65,7 +65,7 @@
                             = f.select(:katana_id, options_from_collection_for_select(Katana.all.all.order(:rarity), :id, :name), include_blank: true)
                         .control
                           = f.submit '入力', class: 'button is-info'
-                .tantou_result_button.column
+                .tantou_result_button
                   = link_to '削除', tantou_path(tantou), data: { confirm: "本当によろしいですか？" }, method: :delete, class: 'button is-danger'
     .tantou-item
       p ブラウザを変えたり、ブラウザのCookieを削除したり、シークレットウィンドウで使うとデータが消えます！
