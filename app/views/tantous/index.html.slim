@@ -66,7 +66,7 @@
                         .control
                           = f.submit '入力', class: 'button is-info'
                 .tantou_result_button
-                  = link_to '削除', tantou_path(tantou), data: { confirm: "本当によろしいですか？" }, method: :delete, class: 'button is-danger'
+                  = link_to '削除', tantou_path(tantou), data: { confirm: "本当に削除しますか？" }, method: :delete, class: 'button is-danger'
     .tantou-item
       p ブラウザを変えたり、ブラウザのCookieを削除したり、シークレットウィンドウで使うとデータが消えます！
 
