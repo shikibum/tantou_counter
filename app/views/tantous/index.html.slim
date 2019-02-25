@@ -53,17 +53,20 @@
                   span = "#{tantou.toishi}"
                 span.result_fuda
                   = tantou.fuda
-              .tantou_result_second-line
-                - if tantou.katana&.name.present?
-                  = tantou.katana.name
-                - else
-                  = form_with(model: tantou, local: true) do |f| 
-                    .form-item.field.has-addons
-                      .control
-                        .select
-                          = f.select(:katana_id, options_from_collection_for_select(Katana.all.all.order(:rarity), :id, :name), include_blank: true)
-                      .control
-                        = f.submit '入力', class: 'button is-info'
+              .tantou_result_second-line.colmuns
+                .tantou_result_form.column
+                  - if tantou.katana&.name.present?
+                    = tantou.katana.name
+                  - else
+                    = form_with(model: tantou, local: true) do |f| 
+                      .form-item.field.has-addons
+                        .control
+                          .select
+                            = f.select(:katana_id, options_from_collection_for_select(Katana.all.all.order(:rarity), :id, :name), include_blank: true)
+                        .control
+                          = f.submit '入力', class: 'button is-info'
+                .tantou_result_button.column
+                  = link_to '削除', tantou_path(tantou), data: { confirm: "本当によろしいですか？" }, method: :delete, class: 'button is-danger'
     .tantou-item
       p ブラウザを変えたり、ブラウザのCookieを削除したり、シークレットウィンドウで使うとデータが消えます！
 

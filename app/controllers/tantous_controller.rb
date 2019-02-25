@@ -39,6 +39,15 @@ class TantousController < ApplicationController
     end
   end
 
+  def destroy
+    @tantou = current_user.tantous.find(params[:id])
+    if @tantou.destroy
+      redirect_to tantous_path
+    else
+      render 'index', notice: '削除できませんでした'
+    end
+  end
+
   private
 
   def tantou_params
