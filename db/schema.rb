@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_27_053003) do
+ActiveRecord::Schema.define(version: 2019_02_27_140053) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2019_02_27_053003) do
     t.string "frigana"
     t.integer "katana_type"
     t.integer "tantou_time"
+    t.boolean "forgeable", default: true, null: false
   end
 
   create_table "tantous", force: :cascade do |t|
