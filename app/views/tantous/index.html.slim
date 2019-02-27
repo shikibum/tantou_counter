@@ -9,7 +9,7 @@
               = f.label '近侍', class: 'label column is-one-quarter-mobile is-1-desktop'
               .column.is-three-quarters-mobile.is-3-desktop
                 .select
-                  = f.select(:kinji_id, options_from_collection_for_select(Katana.all.order(:rarity), :id, :name, @tantou.kinji_id), include_blank: true)
+                  = f.select(:kinji_id, options_from_collection_for_select(Katana.order(:katana_type, :tantou_time, :id), :id, :name, @tantou.kinji_id), include_blank: true)
             .form-item class='columns is-mobile'
               = f.label '木炭', class: 'label column is-one-quarter-mobile is-1-desktop'
               .column.is-3-mobile.is-2-desktop
@@ -62,7 +62,7 @@
                       .form-item.field.has-addons
                         .control
                           .select
-                            = f.select(:katana_id, options_from_collection_for_select(Katana.all.all.order(:rarity), :id, :name), include_blank: true)
+                            = f.select(:katana_id, options_from_collection_for_select(Katana.where(forgeable: true).order(:katana_type, :tantou_time, :id), :id, :name), include_blank: true)
                         .control
                           = f.submit '入力', class: 'button is-info'
                 .tantou_result_button
