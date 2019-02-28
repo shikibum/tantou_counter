@@ -1,8 +1,8 @@
 .container
-  h3 class="title" 鍛刀カウンター 
-  div class="tantou-items"
-    div class="tantou-item"
-      div class='tantou-item_form'
+  h3.title 鍛刀カウンター 
+  .tantou-items
+    .tantou-item
+      .tantou-item_form
         .form-items
           = form_with(model: @tantou, local: true) do |f|
             .form-item class='kinji columns is-mobile'
@@ -31,17 +31,17 @@
               .column.is-three-quarters-mobile.is-2-desktop
                 .select
                   = f.select :fuda, %i[なし 梅 竹 松 富士]
-            div.form-item class='is-mobile'
+            .form-item class='is-mobile'
               = f.submit '鍛刀', class: 'button is-primary is-medium'
-    div.tantou-item.share
+    .tantou-item.share
       a.twitter-share-button href="https://twitter.com/share?ref_src=twsrc%5Etfw" data-size="large" data-text="私の鍛刀結果はこちら" data-url="https://tantou-counter.herokuapp.com#{user_path(current_user.share_id)}" data-show-count="false" data-hashtags="tantou_counter,鍛刀カウンター,刀剣乱舞"
         Tweet
       script(async src="https://platform.twitter.com/widgets.js" charset="utf-8")
-    div class="tantou-item"
-      div class="tantou-item_results"
+    .tantou-item
+      .tantou-item_results
           - @tantous.each.with_index do |tantou, i|
-            div.tantou_result
-              div.tantou_result_first-line
+            .tantou_result
+              .tantou_result_first-line
                 span.result_size
                   = @tantous.size - i
                 span.result_kinji

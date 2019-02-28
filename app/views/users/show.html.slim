@@ -1,26 +1,26 @@
 .container
-  h3 class="title" 鍛刀カウンター
+  h3.title 鍛刀カウンター
   = link_to('新規入力ページはこちら', root_path)
   br
   br
-  div class="tantou-items"
-    div class="tantou-item"
-      div class="tantou-item_results"
+  .tantou-items
+    .tantou-item
+      .tantou-item_results
           - @tantous.each.with_index do |tantou, i|
-            div.tantou_result
-              div.tantou_result_first-line
+            .tantou_result
+              .tantou_result_first-line
                 span.result_size
                   = @tantous.size - i
                 span.result_kinji
                   = '近侍: ' + tantou.kinji&.name
-                div.recipi
+                .recipi
                   span = "#{tantou.mokutan}"
                   span = "#{tantou.tamahagane}"
                   span = "#{tantou.reikyakuzai} "
                   span = "#{tantou.toishi}"
                 span.result_fuda
                   = tantou.fuda
-              div.tantou_result_second-line
+              .tantou_result_second-line
                 - if tantou.katana&.name.present?
                   = tantou.katana.name
                 - else
