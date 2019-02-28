@@ -26,3 +26,9 @@ body {
     width: 840px;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .button.is-primary {
+    width: 100%;
+  }
+}
