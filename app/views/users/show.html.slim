@@ -5,6 +5,15 @@
   br
   .tantou-items
     .tantou-item
+      .tantou-graph
+        = @tantous.size
+        br
+        - @rates.each do |key, value|
+          = key
+          br
+          = value.round(2)
+          br
+    .tantou-item
       .tantou-item_results
           - @tantous.each.with_index do |tantou, i|
             .tantou_result
@@ -21,12 +30,6 @@
                 span.result_fuda
                   = tantou.fuda
               .tantou_result_second-line
-                - if tantou.katana&.name.present?
-                  = tantou.katana.name
-                - else
-                  = form_with(model: tantou, local: true) do |f| 
-                    .form-item class='select field has-addons'
-                      = f.select(:katana_id, options_from_collection_for_select(Katana.all.all.order(:rarity), :id, :name), { include_blank: true }, class: '' )
-                      = f.submit '入力', class: 'button is-info'
+                = tantou.katana.name
 
 
