@@ -9,6 +9,6 @@ class Katana < ApplicationRecord
     5 => '大太刀',
     6 => '槍',
     7 => '薙刀',
-    8 => '剣'   
+    8 => '剣'
   }
 end

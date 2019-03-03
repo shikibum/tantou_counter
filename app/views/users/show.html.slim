@@ -6,12 +6,19 @@
   .tantou-items
     .tantou-item
       .tantou-graph
-        = @tantous.size
+        = "鍛刀回数 #{@tantous.size}回"
         br
         - @rates.each do |katana_type, rate|
           = Katana::KATANA_TYPE[katana_type]
-          br
-          = rate.round(2)
+          = "#{rate.round(2)*100}%" 
+      .tantou-graph
+        - @rates_by_recipe.each do |katana_type, rate|
+          = "木炭#{katana_type[0]}"
+          = "玉鋼#{katana_type[1]}"
+          = "冷却材#{katana_type[2]}"
+          = "砥石#{katana_type[3]}"
+          = Katana::KATANA_TYPE[katana_type[4]]
+          = "#{rate.round(2)*100}%" 
           br
     .tantou-item
       .tantou-item_results
