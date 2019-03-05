@@ -11,6 +11,19 @@
         - @rates.each do |katana_type, rate|
           = Katana::KATANA_TYPE[katana_type]
           = "#{rate.round(2)*100}%" 
+          br
+        p レア件数 
+        = @rares[true]
+        p レア割合
+        = "#{@rares[true].to_f / @tantous.size * 100}%"
+        p レア件数 札あり
+        = "#{@rares_with_fuda[true].to_f / @tantous.where(fuda: %i[梅 竹 松 富士]).count * 100}%"
+        = "#{@rares_with_fuda[true]} / #{@tantous.where(fuda: %i[梅 竹 松 富士]).count}回"
+        p レア件数 札なし
+        = "#{@rares_without_fuda[true].to_f / @tantous.where(fuda: %i[なし]).count * 100}%"
+        = "#{@rares_without_fuda[true]} / #{@tantous.where(fuda: %i[なし]).count}回"
+
+        
       .tantou-graph
         - @rates_by_recipe.each do |katana_type, rate|
           = "木炭#{katana_type[0]}"
