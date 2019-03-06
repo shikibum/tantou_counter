@@ -16,22 +16,19 @@
         = @rares[true]
         p レア割合
         = "#{@rares[true].to_f / @tantous.size * 100}%"
-        p レア件数 札あり
+        p レア 札あり
         = "#{@rares_with_fuda[true].to_f / @tantous.where(fuda: %i[梅 竹 松 富士]).count * 100}%"
         = "#{@rares_with_fuda[true]} / #{@tantous.where(fuda: %i[梅 竹 松 富士]).count}回"
-        p レア件数 札なし
+        p レア 札なし
         = "#{@rares_without_fuda[true].to_f / @tantous.where(fuda: %i[なし]).count * 100}%"
         = "#{@rares_without_fuda[true]} / #{@tantous.where(fuda: %i[なし]).count}回"
-
-        
       .tantou-graph
-        - @rates_by_recipe.each do |katana_type, rate|
-          = "木炭#{katana_type[0]}"
-          = "玉鋼#{katana_type[1]}"
-          = "冷却材#{katana_type[2]}"
-          = "砥石#{katana_type[3]}"
-          = Katana::KATANA_TYPE[katana_type[4]]
-          = "#{rate.round(2)*100}%" 
+        - @res_by_recipe.each do |recipe, size|
+          = "#{recipe[0]}/#{recipe[1]}/#{recipe[2]}/#{recipe[3]}"
+          = " #{size}回"
+        - @rares_by_recipe.each do |recipe, size|
+          = "#{recipe[0]}/#{recipe[1]}/#{recipe[2]}/#{recipe[3]}"
+          =  "#{size}回"
           br
     .tantou-item
       .tantou-item_results
@@ -51,5 +48,4 @@
                   = tantou.fuda
               .tantou_result_second-line
                 = tantou.katana.name
-
 

@@ -10,9 +10,7 @@ class UsersController < ApplicationController
     @rares_with_fuda = user.tantous.joins(:katana).group('katanas.rare').where(fuda: %i[梅 竹 松 富士]).count
     @rares_without_fuda = user.tantous.joins(:katana).group('katanas.rare').where(fuda: %i[なし]).count
 
-
-    res_by_recipe = user.tantous.joins(:katana).group('mokutan', 'tamahagane', 'reikyakuzai', 'toishi', 'katanas.katana_type').order('mokutan', 'tamahagane', 'reikyakuzai', 'toishi', 'katanas.katana_type').count
-    @rates_by_recipe = res_by_recipe.map{ |id, v| [id, v.to_f / res.values.sum] }.to_h
-
+    @res_by_recipe = user.tantous.joins(:katana).group('mokutan', 'tamahagane', 'reikyakuzai', 'toishi').order('mokutan', 'tamahagane', 'reikyakuzai', 'toishi').count
+    @rares_by_recipe = user.tantous.joins(:katana).group('mokutan', 'tamahagane', 'reikyakuzai', 'toishi').order('mokutan', 'tamahagane', 'reikyakuzai', 'toishi').where(katanas: { rare: true }).count
   end
 end
