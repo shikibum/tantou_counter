@@ -12,5 +12,7 @@ class UsersController < ApplicationController
 
     @res_by_recipe = user.tantous.joins(:katana).group('mokutan', 'tamahagane', 'reikyakuzai', 'toishi').order('mokutan', 'tamahagane', 'reikyakuzai', 'toishi').count
     @rares_by_recipe = user.tantous.joins(:katana).group('mokutan', 'tamahagane', 'reikyakuzai', 'toishi').order('mokutan', 'tamahagane', 'reikyakuzai', 'toishi').where(katanas: { rare: true }).count
+    @rares_by_recipe_with_fuda = user.tantous.joins(:katana).group('mokutan', 'tamahagane', 'reikyakuzai', 'toishi').order('mokutan', 'tamahagane', 'reikyakuzai', 'toishi').where(katanas: { rare: true }, tantous: { fuda: %i[梅 竹 松 富士] }).count
+    @rares_by_recipe_without_fuda = user.tantous.joins(:katana).group('mokutan', 'tamahagane', 'reikyakuzai', 'toishi').order('mokutan', 'tamahagane', 'reikyakuzai', 'toishi').where(katanas: { rare: true }, tantous: { fuda: %i[なし] }).count
   end
 end

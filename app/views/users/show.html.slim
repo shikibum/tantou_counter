@@ -28,8 +28,16 @@
           = " #{size}回"
         - @rares_by_recipe.each do |recipe, size|
           = "#{recipe[0]}/#{recipe[1]}/#{recipe[2]}/#{recipe[3]}"
-          =  "#{size}回"
+          = " #{size}回"
           br
+        - @rares_by_recipe_with_fuda do |recipe, size|
+          = "#{recipe[0]}/#{recipe[1]}/#{recipe[2]}/#{recipe[3]}"
+          = " #{size}回"
+          br
+        = @rares_by_recipe_without_fuda 
+          = "#{recipe[0]}/#{recipe[1]}/#{recipe[2]}/#{recipe[3]}"
+          = " #{size}回"
+        /   br
     .tantou-item
       .tantou-item_results
           - @tantous.each.with_index do |tantou, i|
