@@ -1,3 +1,6 @@
+script[src="https://code.highcharts.com/highcharts.js"]
+script[src="https://code.highcharts.com/modules/exporting.js"]
+script[src="https://code.highcharts.com/modules/export-data.js"]
 .container
   h3.title 鍛刀カウンター
   = link_to('新規入力ページはこちら', root_path)
@@ -6,7 +9,7 @@
   .tantou-items
     .tantou-item
       .tantou-graph
-        .id="container",style="min-width: 310px; height: 400px; margin: 0 auto"
+        #container style=("min-width: 310px; height: 200px; margin: 0 auto") 
       .tantou-item
         = "鍛刀回数 #{@tantous.size}回"
         br
@@ -58,4 +61,4 @@
                   = tantou.fuda
               .tantou_result_second-line
                 = tantou.katana.name
-
+.chart-data data-chart="#{@rates.map {|katana_type, rate| { name: Katana::KATANA_TYPE[katana_type], data: [rate] }}.to_json}"
