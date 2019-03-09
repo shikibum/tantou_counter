@@ -8,30 +8,40 @@ script[src="https://code.highcharts.com/modules/export-data.js"]
   br
   .tantou-items
     .tantou-item
-      .tantou-item-total
-        = "鍛刀回数 #{@tantous.size}回"
-        label レア札あり
-        = "#{@rares_with_fuda[true]} / #{@tantous.where(fuda: %i[梅 竹 松 富士]).count}回"
-        = "#{(@rares_with_fuda[true].to_f / @tantous.where(fuda: %i[梅 竹 松 富士]).count * 100).round(1)}%"
-        label レア札なし
-        = "#{@rares_without_fuda[true]} / #{@tantous.where(fuda: %i[なし]).count}回"
-        = "#{(@rares_without_fuda[true].to_f / @tantous.where(fuda: %i[なし]).count * 100).round(1)}%"
-      .tantou-graph
-        #container style=("min-width: 310px; height: 200px; margin: 0 auto") 
-      .tantou-item
-        label レシピ毎のレア！！！！
-        - @total_by_recipe.each do |recipe, size|
-          div
-            = "#{recipe[0]}/#{recipe[1]}/#{recipe[2]}/#{recipe[3]}"
-            div
-              div
-                label 札あり
-                - if size[:with_fuda].present?
-                  = "#{size[:with_fuda][:rare]} / #{size[:with_fuda][:total]}回 #{(size[:with_fuda][:rate] * 100).round(1)} % "
-              div
-                label 札なし
-                - if size[:without_fuda].present?
-                  = "#{size[:without_fuda][:rare]} / #{size[:without_fuda][:total]}回 #{(size[:without_fuda][:rate] * 100).round(1)} % "
+      .total
+        .total_result
+          .totol-count
+            label 鍛刀回数
+            = "#{@tantous.size} 回"
+          .rare-count
+            label レア札あり  
+            .count
+              = "#{@rares_with_fuda[true]} / #{@tantous.where(fuda: %i[梅 竹 松 富士]).count} 回"
+            .count
+              = "#{(@rares_with_fuda[true].to_f / @tantous.where(fuda: %i[梅 竹 松 富士]).count * 100).round(1)}%"
+          .rare-count
+            label レア札なし
+            .count
+              = "#{@rares_without_fuda[true]} / #{@tantous.where(fuda: %i[なし]).count} 回"
+            .count
+              = "#{(@rares_without_fuda[true].to_f / @tantous.where(fuda: %i[なし]).count * 100).round(1)}%"
+        .total-graph
+          #container style=("min-width: 290px; height: 200px; margin: 0 auto") 
+        .total-by-recipe
+          h2 レシピ毎のレア
+          table.table
+            - @total_by_recipe.each do |recipe, size|
+              tr
+                td
+                  = "#{recipe[0]}/#{recipe[1]}/#{recipe[2]}/#{recipe[3]}"
+                  br
+                  label 札あり
+                  - if size[:with_fuda].present?
+                    = "#{size[:with_fuda][:rare]} / #{size[:with_fuda][:total]}回 #{(size[:with_fuda][:rate] * 100).round(1)} % "
+                  br
+                  label 札なし
+                  - if size[:without_fuda].present?
+                    = "#{size[:without_fuda][:rare]} / #{size[:without_fuda][:total]}回 #{(size[:without_fuda][:rate] * 100).round(1)} % "
     .tantou-item
       .tantou-item_results
           - @tantous.each.with_index do |tantou, i|
@@ -41,7 +51,7 @@ script[src="https://code.highcharts.com/modules/export-data.js"]
                   = @tantous.size - i
                 span.result_kinji
                   = '近侍: ' + tantou.kinji&.name
-                .recipi
+                .recipe
                   span = "#{tantou.mokutan}"
                   span = "#{tantou.tamahagane}"
                   span = "#{tantou.reikyakuzai} "
