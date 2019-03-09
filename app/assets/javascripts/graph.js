@@ -8,7 +8,7 @@ $(function () {
       text: '刀種結果'
     },
     xAxis: {
-      categories: ['刀種']
+      visible: false
     },
     yAxis: {
       min: 0,
