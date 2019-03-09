@@ -1,5 +1,5 @@
 $(function () {
-  const chartData = $('.chart-data').data('chart');
+  var chartData = $('.chart-data').data('chart');
   $('#container').highcharts({
     chart: {
       type: 'bar'
