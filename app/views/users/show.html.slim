@@ -3,10 +3,14 @@ script[src="https://code.highcharts.com/modules/exporting.js"]
 script[src="https://code.highcharts.com/modules/export-data.js"]
 .container
   h3.title 鍛刀カウンター
-  = link_to('新規入力ページはこちら', root_path)
+  = link_to('新しく使う・入力ページはこちら', root_path)
   br
   br
   .tantou-items
+    .tantou-item.share
+      a.twitter-share-button href="https://twitter.com/share?ref_src=twsrc%5Etfw" data-size="large" data-text="私の鍛刀結果はこちら" data-show-count="false" data-hashtags="tantou_counter,鍛刀カウンター,刀剣乱舞"
+          Tweet
+      script(async src="https://platform.twitter.com/widgets.js" charset="utf-8")
     .tantou-item
       .total
         .total_result
