@@ -55,8 +55,11 @@
                   = tantou.fuda
               .tantou_result_second-line
                 .tantou_result_form
-                  - if tantou.katana&.name.present?
-                    = tantou.katana.name
+                  - if tantou.katana&.name.present? && tantou.katana.rare?
+                    .rare
+                      = tantou.katana.name
+                  - elsif tantou.katana&.name.present?
+                   = tantou.katana.name
                   - else
                     = form_with(model: tantou, local: true) do |f| 
                       .form-item.field.has-addons

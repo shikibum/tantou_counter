@@ -58,6 +58,6 @@ script[src="https://code.highcharts.com/modules/export-data.js"]
                   span = "#{tantou.toishi}"
                 span.result_fuda
                   = tantou.fuda
-              .tantou_result_second-line
+              .tantou_result_second-line class="#{tantou.katana.rare? ? "rare" : ""}"
                 = tantou.katana.name
 .chart-data data-chart="#{@rates.map {|katana_type, rate| { name: Katana::KATANA_TYPE[katana_type], data: [rate] }}.to_json}"
