@@ -1,4 +1,4 @@
-$(function () {
+$(document).on('turbolinks:load', function () {
   var chartData = $('.chart-data').data('chart');
   $('#container').highcharts({
     chart: {
