@@ -1,0 +1,9 @@
+ja:
+  activerecord:
+    attributes:
+      tantou: 
+        mokutan: '木炭'
+        tamahagane: '玉鋼'
+        reikyakuzai: '冷却材'
+        toishi: '砥石'
+

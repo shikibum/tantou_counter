@@ -5,10 +5,10 @@ class Tantou < ApplicationRecord
   belongs_to :katana, optional: true
   belongs_to :user
 
-  validates :mokutan, inclusion: { in: 50..999 }
-  validates :tamahagane, inclusion: { in: 50..999 }
-  validates :reikyakuzai, inclusion: { in: 50..999 }
-  validates :toishi, inclusion: { in: 50..999 }
+  validates :mokutan, numericality: { greater_than_or_equal_to: 50, less_than_or_equal_to: 999 }
+  validates :tamahagane, numericality: { greater_than_or_equal_to: 50, less_than_or_equal_to: 999 }
+  validates :reikyakuzai, numericality: { greater_than_or_equal_to: 50, less_than_or_equal_to: 999 }
+  validates :toishi, numericality: { greater_than_or_equal_to: 50, less_than_or_equal_to: 999 }
 
   attr_reader :all
 

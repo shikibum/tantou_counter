@@ -32,9 +32,10 @@ class TantousController < ApplicationController
 
   def create
     @tantou = current_user.tantous.new(tantou_params)
-    if @tantou.save!
+    if @tantou.save
       redirect_to tantous_path
     else
+      @tantous = current_user.tantous.order(created_at: :desc)
       render 'index', notice: '鍛刀結果を保存できませんでした'
     end
   end

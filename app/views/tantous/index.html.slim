@@ -1,4 +1,13 @@
 .container
+  article.message.is-danger
+  - if flash.notice.present?
+    .message-body
+      = flash.notice
+  article.message.is-danger
+    - if @tantou.errors.any?
+      - @tantou.errors.full_messages.each do |message|
+        .message-body
+          = message
   h3.title 鍛刀カウンター 
   .tantou-items
     .tantou-item

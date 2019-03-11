@@ -27,6 +27,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'slim-rails'
 gem "bulma-rails", "~> 0.7.4"
 gem "jquery-rails"
+gem 'rails-i18n'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
@@ -44,8 +45,6 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'pry-byebug'
-  gem 'rspec-rails'
-  gem 'factory_bot_rails'
   gem 'spring-commands-rspec'
 end
 
@@ -64,6 +63,8 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
