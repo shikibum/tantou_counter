@@ -52,13 +52,7 @@ class TantousController < ApplicationController
   private
 
   def tantou_params
-    if params[:tantou][:all].present?
-      params.require(:tantou).permit(
-        :kinji_id,
-        :all,
-        :fuda
-      )
-    elsif params[:tantou][:katana_id].present?
+    if params[:tantou][:katana_id].present?
       params.require(:tantou).permit(
         :katana_id
       )

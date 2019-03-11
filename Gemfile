@@ -65,6 +65,8 @@ group :test do
   gem 'chromedriver-helper'
   gem 'rspec-rails'
   gem 'factory_bot_rails'
+  gem 'launchy'
+  gem 'rack_session_access'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
