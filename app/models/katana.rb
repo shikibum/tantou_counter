@@ -10,5 +10,5 @@ class Katana < ApplicationRecord
     6 => '槍',
     7 => '薙刀',
     8 => '剣'
-  }
+  }.freeze
 end

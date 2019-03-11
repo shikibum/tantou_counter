@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe '鍛刀投稿機能' do
@@ -50,6 +52,5 @@ describe '鍛刀投稿機能' do
     visit tantous_path
     click_link '集計結果をみる'
     expect(page).to have_css('.total')
-    save_and_open_page
   end
 end
