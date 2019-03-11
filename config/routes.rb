@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  resources :tantous, only: %i[index update destroy]
+  resources :tantous
   resources :users, only: %i[show]
   root to: 'tantous#index'
 end
