@@ -7,6 +7,7 @@ jobs: # a collection of steps
     docker: # run the steps with Docker
       - image: circleci/ruby:2.5.1 # ...with this image as the primary container; this is where all `steps` will run
         environment: # environment variables for primary container
+          BUNDLER_VERSION: 2.0.1
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
           BUNDLE_PATH: vendor/bundle
@@ -20,7 +21,10 @@ jobs: # a collection of steps
           POSTGRES_PASSWORD: ""
     steps: # a collection of executable commands
       - checkout # special step to check out source code to working directory
-
+      
+      - run:
+          name: Update bundler
+          command: gem update bundler -v $BUNDLER_VERSION
       # Which version of bundler?
       - run:
           name: Which bundler?
