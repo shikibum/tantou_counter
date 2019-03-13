@@ -14,15 +14,5 @@
         "version": "9.5"
       }
     }
-  ],
-  "buildpacks": [{
-    "url": "https://github.com/stomita/heroku-buildpack-phantomjs"
-  }],
-  "environments": {
-    "test": {
-      "scripts": {
-        "test": "bundle exec rake test"
-      }
-    }
-  }
+  ]
 }
