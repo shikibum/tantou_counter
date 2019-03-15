@@ -1,5 +1,7 @@
 # 鍛刀カウンター
 [![CircleCI](https://circleci.com/gh/shikibum/tantou_counter.svg?style=svg)](https://circleci.com/gh/shikibum/tantou_counter)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 
 オンラインゲーム「刀剣乱舞」の鍛刀結果を保存するWebアプリです。
 
