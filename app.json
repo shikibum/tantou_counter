@@ -12,5 +12,8 @@
     "options": {
       "version": "9.5"
     }
-  }]
+  }],
+  "scripts": {
+    "postdeploy": "bundle exec rake db:migrate"
+  }
 }
