@@ -7,8 +7,9 @@
 オンラインゲーム「刀剣乱舞」の鍛刀結果を保存するWebアプリです。
 https://tantou-counter.herokuapp.com/
 
-<img src="https://user-images.githubusercontent.com/37039268/54135387-0cdd7c80-445d-11e9-9dbe-c3f2e0156dae.png" width=500>
+![image](https://user-images.githubusercontent.com/37039268/54660583-54799d80-4b1a-11e9-8711-9f9ee106cd84.png)
 
 鍛刀結果を保存すると集計結果ページで自動集計されたデータが見られます。
 
-<img src="https://user-images.githubusercontent.com/37039268/54135453-2aaae180-445d-11e9-9d4b-29c57cded94b.png" width=500>
+![image](https://user-images.githubusercontent.com/37039268/54660491-02d11300-4b1a-11e9-80b4-9596931b044e.png)
+
