@@ -5,7 +5,10 @@
 
 
 オンラインゲーム「刀剣乱舞」の鍛刀結果を保存するWebアプリです。
+
 https://tantou-counter.herokuapp.com/
+
+鍛刀情報を入力した後、鍛刀結果を入力してください。
 
 ![image](https://user-images.githubusercontent.com/37039268/54660583-54799d80-4b1a-11e9-8711-9f9ee106cd84.png)
 
