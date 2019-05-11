@@ -6,9 +6,8 @@ class UsersController < ApplicationController
     @tantous = user&.tantous.where.not(katana_id: nil).order(created_at: :desc)
     res = user.tantous.joins(:katana).group('katanas.katana_type').count
     @rates = res.map { |id, v| [id, v.to_f / res.values.sum] }.to_h
-    @rares = user.tantous.joins(:katana).group('katanas.rare').count
-    @rares_with_fuda = user.tantous.joins(:katana).group('katanas.rare').where(fuda: %i[梅 竹 松 富士]).count
-    @rares_without_fuda = user.tantous.joins(:katana).group('katanas.rare').where(fuda: %i[なし]).count
+    @rares_with_fuda = user.tantous.joins(:katana).where(fuda: %i[梅 竹 松 富士], katanas: { rare: true }).count
+    @rares_without_fuda = user.tantous.joins(:katana).where(fuda: 'なし', katanas: { rare: true }).count
 
     # {[50, 50] => { rare: 3, total: 10, rate: 0.33333 } }
     res_by_recipe_with_fuda = user.tantous.joins(:katana).group('mokutan', 'tamahagane', 'reikyakuzai', 'toishi').order('mokutan', 'tamahagane', 'reikyakuzai', 'toishi').where(tantous: { fuda: %i[梅 竹 松 富士] }).count
