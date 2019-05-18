@@ -6,19 +6,19 @@ class UsersController < ApplicationController
     @tantous = user&.tantous.where.not(katana_id: nil).order(created_at: :desc)
     res = user.tantous.joins(:katana).group('katanas.katana_type').count
     @rates = res.map { |id, v| [id, v.to_f / res.values.sum] }.to_h
-    @rares_with_fuda = user.tantous.joins(:katana).with_fuda.where(katanas: { rare: true }).count
-    @rares_without_fuda = user.tantous.joins(:katana).without_fuda.where(katanas: { rare: true }).count
+    @rares_with_fuda = user.tantous.rare_katana.with_fuda.count
+    @rares_without_fuda = user.tantous.rare_katana.without_fuda.count
 
     # {[50, 50] => { rare: 3, total: 10, rate: 0.33333 } }
-    res_by_recipe_with_fuda = user.tantous.joins(:katana).group('mokutan', 'tamahagane', 'reikyakuzai', 'toishi').order('mokutan', 'tamahagane', 'reikyakuzai', 'toishi').with_fuda.count
-    rares_by_recipe_with_fuda = user.tantous.joins(:katana).group('mokutan', 'tamahagane', 'reikyakuzai', 'toishi').order('mokutan', 'tamahagane', 'reikyakuzai', 'toishi').with_fuda.where(katanas: { rare: true }).count
+    res_by_recipe_with_fuda = user.tantous.group('mokutan', 'tamahagane', 'reikyakuzai', 'toishi').order('mokutan', 'tamahagane', 'reikyakuzai', 'toishi').with_fuda.count
+    rares_by_recipe_with_fuda = user.tantous.rare_katana.group('mokutan', 'tamahagane', 'reikyakuzai', 'toishi').order('mokutan', 'tamahagane', 'reikyakuzai', 'toishi').with_fuda.count
     @total_by_recipe_with_fuda = res_by_recipe_with_fuda.map do |recipe, count|
       rare_count = rares_by_recipe_with_fuda[recipe]
       [recipe, { rare: rare_count.to_i, total: count, rate: rare_count.to_f / count }]
     end.to_h
 
-    res_by_recipe_without_fuda = user.tantous.joins(:katana).group('mokutan', 'tamahagane', 'reikyakuzai', 'toishi').order('mokutan', 'tamahagane', 'reikyakuzai', 'toishi').without_fuda.count
-    rares_by_recipe_without_fuda = user.tantous.joins(:katana).group('mokutan', 'tamahagane', 'reikyakuzai', 'toishi').order('mokutan', 'tamahagane', 'reikyakuzai', 'toishi').without_fuda.where(katanas: { rare: true }).count
+    res_by_recipe_without_fuda = user.tantous.group('mokutan', 'tamahagane', 'reikyakuzai', 'toishi').order('mokutan', 'tamahagane', 'reikyakuzai', 'toishi').without_fuda.count
+    rares_by_recipe_without_fuda = user.tantous.rare_katana.group('mokutan', 'tamahagane', 'reikyakuzai', 'toishi').order('mokutan', 'tamahagane', 'reikyakuzai', 'toishi').without_fuda.count
     @total_by_recipe_without_fuda = res_by_recipe_without_fuda.map do |recipe, count|
       rare_count = rares_by_recipe_without_fuda[recipe]
       [recipe, { rare: rare_count.to_i, total: count, rate: rare_count.to_f / count }]
