@@ -14,4 +14,5 @@ class Tantou < ApplicationRecord
   scope :without_fuda, -> { where(fuda: 'なし') }
   scope :rare_katana, -> { joins(:katana).where(katanas: { rare: true }) }
   scope :group_by_shizai, -> { group('mokutan', 'tamahagane', 'reikyakuzai', 'toishi') }
+  scope :order_by_shizai, -> { order('mokutan', 'tamahagane', 'reikyakuzai', 'toishi') }
 end
