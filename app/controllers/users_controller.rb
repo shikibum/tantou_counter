@@ -15,12 +15,7 @@ class UsersController < ApplicationController
     @total_by_recipe_without_fuda = retrieve_total_by_recipe_without_fuda(user)
 
     # {[50, 50] => {fuda: { rare: 3, total: 10, rate: 0.33333 }, without_fuda: { rare: 3, total: 10, rate: 0.33333 }}
-    recipes = (@total_by_recipe_with_fuda.keys + @total_by_recipe_without_fuda.keys).uniq
-    @total_by_recipe = recipes.map do |recipe|
-      with_fuda = @total_by_recipe_with_fuda[recipe]
-      without_fuda = @total_by_recipe_without_fuda[recipe]
-      [recipe, { with_fuda: with_fuda, without_fuda: without_fuda }]
-    end.to_h
+    @total_by_recipe = calculate_total_by_recipe(@total_by_recipe_with_fuda, @total_by_recipe_without_fuda)
   end
 
   private
@@ -40,6 +35,15 @@ class UsersController < ApplicationController
     res_by_recipe_without_fuda.map do |recipe, count|
       rare_count = rares_by_recipe_without_fuda[recipe]
       [recipe, { rare: rare_count.to_i, total: count, rate: rare_count.to_f / count }]
+    end.to_h
+  end
+
+  def calculate_total_by_recipe(total_by_recipe_with_fuda, total_by_recipe_without_fuda)
+    recipes = (total_by_recipe_with_fuda.keys + total_by_recipe_without_fuda.keys).uniq
+    recipes.map do |recipe|
+      with_fuda = total_by_recipe_with_fuda[recipe]
+      without_fuda = total_by_recipe_without_fuda[recipe]
+      [recipe, { with_fuda: with_fuda, without_fuda: without_fuda }]
     end.to_h
   end
 end
