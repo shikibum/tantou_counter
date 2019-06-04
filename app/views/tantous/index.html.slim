@@ -62,7 +62,7 @@
                   = tantou.fuda
               .tantou_result_second-line
                 .tantou_result_form
-                  - if tantou.katana&.name.present? && tantou.katana.rare?
+                  - if tantou.katana && tantou.katana.name.present? && tantou.katana.rare?
                     .rare
                       = tantou.katana.name
                   - elsif tantou.katana&.name.present?

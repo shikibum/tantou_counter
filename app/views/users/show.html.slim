@@ -17,15 +17,15 @@
           .rare-count
             label レア札あり  
             .count
-              = "#{@rares_with_fuda[true]} / #{@tantous.where(fuda: %i[梅 竹 松 富士]).count} 回"
+              = "#{@rares_with_fuda} / #{@tantous.where(fuda: %i[梅 竹 松 富士]).count} 回"
             .count
-              = "#{(@rares_with_fuda[true].to_f / @tantous.where(fuda: %i[梅 竹 松 富士]).count * 100).round(1)}%"
+              = "#{(@rares_with_fuda.to_f / @tantous.where(fuda: %i[梅 竹 松 富士]).count * 100).round(1)}%"
           .rare-count
             label レア札なし
             .count
-              = "#{@rares_without_fuda[true]} / #{@tantous.where(fuda: %i[なし]).count} 回"
+              = "#{@rares_without_fuda} / #{@tantous.where(fuda: %i[なし]).count} 回"
             .count
-              = "#{(@rares_without_fuda[true].to_f / @tantous.where(fuda: %i[なし]).count * 100).round(1)}%"
+              = "#{(@rares_without_fuda.to_f / @tantous.where(fuda: %i[なし]).count * 100).round(1)}%"
         .total-graph
           #container style=("min-width: 290px; height: 200px; margin: 0 auto") 
         .total-by-recipe
