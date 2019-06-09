@@ -8,4 +8,9 @@ class Campaign < ApplicationRecord
   def self.latest
     active.order(start_at: :desc).first
   end
+
+  def self.current
+    now = Time.current
+    where('start_at <= ? AND end_at >= ?', now, now).first
+  end
 end

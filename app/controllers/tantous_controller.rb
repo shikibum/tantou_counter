@@ -66,7 +66,7 @@ class TantousController < ApplicationController
         :reikyakuzai,
         :toishi,
         :fuda
-      )
+      ).merge(campaign_id: Campaign.current.id)
     end
   end
 end

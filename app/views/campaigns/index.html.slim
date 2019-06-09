@@ -1,0 +1,10 @@
+.container
+  article.message.is-danger
+    - if flash.notice.present?
+      .message-body
+        = flash.notice
+  h3.title 鍛刀カウンター
+  .total
+    ul
+      - @campaigns.each do |campaign|
+        li= link_to "#{campaign.name} (#{l(campaign.start_at.to_date)} - #{l(campaign.end_at.to_date)})", user_campaign_path(@user.share_id, campaign)

@@ -2,8 +2,8 @@
 
 class UsersController < ApplicationController
   def show
-    user = User.find_by(share_id: params[:id])
+    @user = User.find_by(share_id: params[:id])
     @campaign = Campaign.latest
-    @stat = Stat.new(user, @campaign)
+    @stat = Stat.new(@user, @campaign)
   end
 end

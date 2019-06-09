@@ -1,7 +1,8 @@
 .container
   h3.title 鍛刀カウンター
-  = link_to('新しく使う・入力ページはこちら', root_path)
+  = link_to('新しく使う・入力ページはこちら', root_path)
   br
+  = link_to('過去のキャンペーンの結果はこちら', user_campaigns_path(@user.share_id))
   br
   .tantou-items
     .tantou-item.share
