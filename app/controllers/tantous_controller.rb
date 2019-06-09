@@ -5,6 +5,7 @@ class TantousController < ApplicationController
 
   def index
     @tantous = current_user.tantous.order(created_at: :desc)
+    current_campaign = Campaign.where('start_at <= ? AND end_at >= ?', Time.current, Time.current).first
     if current_user.tantous.last.present?
       last_tantou = current_user.tantous.last
       @tantou = Tantou.new(
@@ -14,7 +15,8 @@ class TantousController < ApplicationController
         tamahagane: last_tantou.tamahagane,
         reikyakuzai: last_tantou.reikyakuzai,
         toishi: last_tantou.toishi,
-        fuda: last_tantou.fuda
+        fuda: last_tantou.fuda,
+        campaign_id: current_campaign.id
       )
     else
       @tantou = Tantou.new(user: current_user)
@@ -64,7 +66,7 @@ class TantousController < ApplicationController
         :reikyakuzai,
         :toishi,
         :fuda
-      )
+      ).merge(campaign_id: Campaign.current.id)
     end
   end
 end

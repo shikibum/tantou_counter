@@ -1,7 +1,8 @@
 .container
   h3.title 鍛刀カウンター
-  = link_to('新しく使う・入力ページはこちら', root_path)
+  = link_to('新しく使う・入力ページはこちら', root_path)
   br
+  = link_to('過去のキャンペーンの結果はこちら', user_campaigns_path(@user.share_id))
   br
   .tantou-items
     .tantou-item.share
@@ -10,28 +11,32 @@
       script(async src="https://platform.twitter.com/widgets.js" charset="utf-8")
     .tantou-item
       .total
+        h4.title
+          = @campaign.name
+        .subtitle
+          = "#{l(@campaign.start_at.to_date)} - #{l(@campaign.end_at.to_date)}"
         .total_result
           .totol-count
             label 鍛刀回数
-            = "#{@tantous.size} 回"
+            = "#{@stat.tantous.size} 回"
           .rare-count
-            label レア札あり  
+            label レア札あり
             .count
-              = "#{@rares_with_fuda} / #{@tantous.where(fuda: %i[梅 竹 松 富士]).count} 回"
+              = "#{@stat.rares_with_fuda[:count]} / #{@stat.rares_with_fuda[:total]} 回"
             .count
-              = "#{(@rares_with_fuda.to_f / @tantous.where(fuda: %i[梅 竹 松 富士]).count * 100).round(1)}%"
+              = "#{@stat.rares_with_fuda[:rate]}%"
           .rare-count
             label レア札なし
             .count
-              = "#{@rares_without_fuda} / #{@tantous.where(fuda: %i[なし]).count} 回"
+              = "#{@stat.rares_without_fuda[:count]} / #{@stat.rares_without_fuda[:total]} 回"
             .count
-              = "#{(@rares_without_fuda.to_f / @tantous.where(fuda: %i[なし]).count * 100).round(1)}%"
+              = "#{@stat.rares_without_fuda[:rate]}%"
         .total-graph
           #container style=("min-width: 290px; height: 200px; margin: 0 auto") 
         .total-by-recipe
           h2 レシピ毎のレア
           table.table
-            - @total_by_recipe.each do |recipe, size|
+            - @stat.total_by_recipe.each do |recipe, size|
               tr
                 td
                   = "#{recipe[0]}/#{recipe[1]}/#{recipe[2]}/#{recipe[3]}"
@@ -45,11 +50,11 @@
                     = "#{size[:without_fuda][:rare]} / #{size[:without_fuda][:total]}回 #{(size[:without_fuda][:rate] * 100).round(1)} % "
     .tantou-item
       .tantou-item_results
-          - @tantous.each.with_index do |tantou, i|
+          - @stat.tantous.order(created_at: :asc).each.with_index do |tantou, i|
             .tantou_result
               .tantou_result_first-line
                 span.result_size
-                  = @tantous.size - i
+                  = @stat.tantous.size - i
                 span.result_kinji
                   = '近侍: ' + tantou.kinji&.name
                 .recipe
@@ -61,4 +66,4 @@
                   = tantou.fuda
               .tantou_result_second-line class="#{tantou.katana.rare? ? "rare" : ""}"
                 = tantou.katana.name
-.chart-data data-chart="#{@rates.map {|katana_type, rate| { name: Katana::KATANA_TYPE[katana_type], data: [rate] }}.to_json}"
+.chart-data data-chart="#{@stat.rates.map {|katana_type, rate| { name: Katana::KATANA_TYPE[katana_type], data: [rate] }}.to_json}"

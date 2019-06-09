@@ -6,6 +6,7 @@ describe '鍛刀投稿機能' do
   before do
     create(:katana)
     create(:katana, :not_rare)
+    create(:campaign, start_at: '2019-01-01', end_at: '2100-01-01')
   end
 
   it 'can post tantou record' do
@@ -27,7 +28,7 @@ describe '鍛刀投稿機能' do
 
   it 'delete tantou record' do
     user = create(:user)
-    create(:tantou, user: user)
+    create(:tantou, user: user, campaign_id: Campaign.current.id)
     page.set_rack_session(user_id: user.id)
     visit tantous_path
     within '.tantou_result' do
@@ -40,14 +41,14 @@ describe '鍛刀投稿機能' do
 
   it 'see only own record' do
     user = create(:user)
-    create(:tantou, user: user)
+    create(:tantou, user: user, campaign_id: Campaign.current.id)
     visit tantous_path
     expect(page).to have_no_css('.tantou_result')
   end
 
   it 'can visit show page' do
     user = create(:user)
-    create(:tantou, user: user)
+    create(:tantou, user: user, campaign_id: Campaign.current.id)
     page.set_rack_session(user_id: user.id)
     visit tantous_path
     click_link '集計結果をみる'
